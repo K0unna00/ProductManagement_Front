@@ -1,0 +1,18 @@
+<div class="card">
+    <!-- <img [src]="product.imageUrl" [alt]="product.name" class="image" /> -->
+    <div class="info">
+        <div class="title">{{ product.name }}</div>
+        <div>
+            <p class="description">{{ product.description }}</p>
+        </div>
+        <div class="price">{{ product.price | currency: 'USD' }}</div>
+
+        <button mat-raised-button class="w-100" (click)="addToCart(product.id)">
+            Add to cart
+        </button>
+
+        <button mat-fab color="primary" class="editBtn" (click)="onViewProductDetail()">
+            <mat-icon class="editIcon">edit</mat-icon>
+        </button>
+    </div>
+</div>

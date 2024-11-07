@@ -1,0 +1,20 @@
+<nav class="navbar">
+    <div class="container">
+        <div id="logo" class="logo" (click)="navigateToHome()">
+            <h1 class="m-0">Product management</h1>
+        </div>
+
+        <div class="wrapper">
+            <button mat-raised-button (click)="navigateToProductDetail()">
+                Create product
+            </button>
+
+            <div class="cart">
+                <mat-icon class="cartIcon" color="primary">shopping_cart</mat-icon>
+                <span class="productCount">
+                    {{ cartCount$ | async }}
+                </span>
+            </div>
+        </div>
+    </div>
+</nav>

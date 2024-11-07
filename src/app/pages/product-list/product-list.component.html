@@ -1,0 +1,10 @@
+<div class="products">
+    <div class="container p-0">
+        <div class="title w-100">
+            <h1 class="m-0 ">Products</h1>
+            <div class="list">
+                <app-product-card *ngFor="let item of products" [product]="item"></app-product-card>
+            </div>
+        </div>
+    </div>
+</div>

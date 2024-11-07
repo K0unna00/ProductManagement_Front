@@ -1,0 +1,24 @@
+
+.form{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    .formItem {
+        &:nth-child(odd){
+            padding-right: 10px;
+        }
+        &:nth-child(even){
+            padding-left: 10px;
+        }
+        mat-form-field{
+            width: 100%;
+        }
+    }
+    .buttons{
+        padding: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}

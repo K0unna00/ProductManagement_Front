@@ -1,0 +1,39 @@
+
+.navbar{
+    margin-top: 40px;
+    background-color: #d3d3d3;
+    .container{
+        align-items: center;
+        padding: 10px 0;
+        .logo{
+            cursor: pointer;
+        }
+    }
+
+    .wrapper{
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        .cart{
+            position: relative;
+            width: fit-content;
+            .cartIcon{
+                font-size: 28px;
+            }
+            .productCount{
+                position: absolute;
+                top: -12px;
+                right: -12px;
+                width: 18px;
+                height: 18px;
+                border-radius: 50%;
+                background-color: red;
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
+   
+}

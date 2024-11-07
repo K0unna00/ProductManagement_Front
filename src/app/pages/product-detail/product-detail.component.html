@@ -1,0 +1,42 @@
+<div class="container p-0">
+    <h1>Create Product</h1>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
+        
+        <div class="formItem col-6">
+            <mat-form-field appearance="fill">
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name" type="text" required>
+                <mat-error *ngIf="form.get('name').hasError('required')">Name is required.</mat-error>
+                <mat-error *ngIf="form.get('name').hasError('minlength')">Name must be at least 3 characters long.</mat-error>
+            </mat-form-field>
+        </div>
+        
+        <div class="formItem col-6">
+            <mat-form-field appearance="fill">
+                <mat-label>Description</mat-label>
+                <input matInput formControlName="description" type="text" required>
+                <mat-error *ngIf="form.get('description').hasError('required')">Description is required.</mat-error>
+                <mat-error *ngIf="form.get('description').hasError('maxlength')">Description cannot be longer than 40 characters.</mat-error>
+            </mat-form-field>
+        </div>
+        
+        <div class="formItem col-6">
+            <mat-form-field appearance="fill">
+                <mat-label>Price</mat-label>
+                <input matInput formControlName="price" type="number" required>
+                <mat-error *ngIf="form.get('price').hasError('required')">Price is required.</mat-error>
+                <mat-error *ngIf="form.get('price').hasError('min')">Price must be greater than 0.</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div  class="formItem col-12 buttons p-0">
+            <div class="submitBtn">
+                <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Create Product</button>
+            </div>
+
+            <div class="deleteBtn" *ngIf="currentId != '0'">
+                <button mat-raised-button color="warn" (click)="deleteItem()"> Delete Product</button>
+            </div>
+        </div>
+    </form>
+</div>
