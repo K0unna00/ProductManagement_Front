@@ -12,8 +12,7 @@ import { CartState } from '../../store/reducers/cart.reducers';
 export class NavbarComponent {
   cartCount$: Observable<number>;
   
-  constructor(private router : Router,
-    private store: Store<{ cart: CartState }>) {
+  constructor(private router : Router, private store: Store<{ cart: CartState }>) {
     this.cartCount$ = store.pipe(select('cart', 'count'));
   }
 
