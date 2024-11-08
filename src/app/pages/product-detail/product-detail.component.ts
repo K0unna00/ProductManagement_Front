@@ -42,15 +42,21 @@ export class ProductDetailComponent {
   }
 
   async getProductById(id: string){
-    let data = await lastValueFrom(this.productService.getById(id));
+    try{
+      let data = await lastValueFrom(this.productService.getById(id));
 
-    this.currentData = data;
-
-    this.form.patchValue({
-      description: data.description,
-      name: data.name,
-      price: data.price
-    });
+      this.currentData = data;
+  
+      this.form.patchValue({
+        description: data.description,
+        name: data.name,
+        price: data.price
+      });
+    }
+    catch(err){
+      this.router.navigate(['notFound'])
+    }
+    
 
   }
 
