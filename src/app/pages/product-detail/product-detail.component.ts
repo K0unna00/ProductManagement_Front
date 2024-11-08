@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { CartState } from '../../store/reducers/cart.reducers';
 import { removeFromCart } from '../../store/actions/cart.actions';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-product-detail',
@@ -60,14 +61,15 @@ export class ProductDetailComponent {
     catch(err){
       this.router.navigate(['notFound'])
     }
-    
-
   }
 
   async onSubmit() {
     let product : Product = {
       ...this.form.value
     };
+
+    console.log("SUBMIT WORKDSDAS");
+    
 
     if(this.currentId != '0'){
       product.id = this.currentId;
@@ -78,6 +80,14 @@ export class ProductDetailComponent {
       await lastValueFrom(this.productService.create(product));
     }
 
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Product saved successfully",
+      showConfirmButton: false,
+      timer: 1500
+    });
+
     this.router.navigate(['']);
   }
 
@@ -86,6 +96,14 @@ export class ProductDetailComponent {
     this.store.dispatch(removeFromCart({ id}));
 
     await lastValueFrom(this.productService.delete(this.currentId));
+
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Product deleted successfully",
+      showConfirmButton: false,
+      timer: 1500
+    });
 
     this.router.navigate(['']);
   }
