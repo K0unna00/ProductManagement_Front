@@ -2,8 +2,11 @@
     <div class="container p-0">
         <div class="title w-100">
             <h1 class="m-0 ">Cart</h1>
-            <div class="list">
-                <app-product-card *ngFor="let item of products" [product]="item"></app-product-card>
+            <div class="info" *ngIf="!isAnyItem">
+                Cart is empty
+            </div>
+            <div class="list" *ngIf="isAnyItem">
+                <app-product-card [isViewMode]="true" *ngFor="let item of products" [product]="item"></app-product-card>
             </div>
         </div>
     </div>

@@ -8,12 +8,12 @@
 
         <div class="price">{{ product.price | currency: 'USD' }}</div>
 
-        <button mat-fab color="primary" class="editBtn" (click)="onViewProductDetail()">
+        <button *ngIf="!isViewMode" mat-fab color="primary" class="editBtn" (click)="onViewProductDetail()">
             <mat-icon class="editIcon">edit</mat-icon>
         </button>
     </div>
 
-    <button mat-raised-button class="w-100 addBtn" (click)="addToCart(product.id, product.name)">
+    <button *ngIf="!isViewMode" mat-raised-button class="w-100 addBtn" (click)="addToCart(product.id, product.name)">
         Add to cart
     </button>
 </div>

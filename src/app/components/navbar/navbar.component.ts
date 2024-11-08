@@ -11,10 +11,10 @@ import { selectCartCount } from '../../store/selectors/cart.selector';
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
-  cartCount$: Observable<number>;
+  itemCount: Observable<number>;
   
   constructor(private router : Router, private store: Store<{ cart: CartState }>) {
-    this.cartCount$ = store.pipe(select(selectCartCount));
+    this.itemCount = store.pipe(select(selectCartCount));
   }
 
   navigateToHome(){

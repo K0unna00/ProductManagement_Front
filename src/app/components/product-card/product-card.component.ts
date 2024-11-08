@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Product } from '../../models/product.model';
 import { Router } from '@angular/router';
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, NgIf } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Store } from '@ngrx/store';
@@ -12,10 +12,11 @@ import { addToCart } from '../../store/actions/cart.actions';
   selector: 'app-product-card',
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.scss',
-  imports : [CurrencyPipe, MatButtonModule, MatIconModule]
+  imports : [CurrencyPipe, MatButtonModule, MatIconModule, NgIf]
 })
 export class ProductCardComponent {
   @Input() product : Product
+  @Input() isViewMode : boolean ;
 
   constructor(private router: Router,
     private store: Store

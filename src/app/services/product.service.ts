@@ -29,4 +29,8 @@ export class ProductService {
   update(id: string, model: Product): Observable<Product> {
     return this.http.put<Product>(`product/${id}`, model);
   }
+
+  getByIds(ids : string[]) : Observable<Product[]>{
+    return this.http.post<Product[]>(`product/getByIds`, ids)
+  }
 }
