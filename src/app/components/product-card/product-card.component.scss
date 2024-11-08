@@ -1,12 +1,14 @@
 .card {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     border: 1px solid #ccc;
     border-radius: 8px;
-    padding: 16px;
+    padding: 16px 24px;
     width: 300px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     position: relative;
+    height: 250px;
   
   .image {
     max-width: 100%;
@@ -23,12 +25,14 @@
   .title {
     font-weight: bold;
     text-align: center;
+    margin-bottom: 12px;
   }
   
   .description {
     color: #666;
     margin-bottom: 12px;
     text-align: center;
+
   }
   
   .price {
@@ -36,6 +40,10 @@
     color: #2d2d2d;
     margin-bottom: 16px;
     text-align: right;
+  }
+
+  .addBtn{
+    align-self: end;
   }
 
   .editBtn{

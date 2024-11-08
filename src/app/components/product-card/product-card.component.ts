@@ -25,8 +25,8 @@ export class ProductCardComponent {
     this.router.navigate(['/products/', this.product.id]);
   }
 
-  addToCart(id: string) {
-    this.store.dispatch(addToCart({ id }));
+  addToCart(id: string, name : string) {
+    this.store.dispatch(addToCart({ id , name}));
   }
 
 

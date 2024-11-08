@@ -3,14 +3,27 @@ import { addToCart, removeFromCart } from '../actions/cart.actions';
 
 export interface CartState {
   count: number;
+  items: { id: string; name: string }[];
 }
 
 export const initialState: CartState = {
-  count: 0
+  count: 0,
+  items :[]
 };
 
 export const cartReducer = createReducer(
   initialState,
-  on(addToCart, (state) => ({ ...state, count: state.count + 1 })),
-  on(removeFromCart, (state) => ({ ...state, count: state.count - 1 }))
+  on(addToCart, (state, { id, name }) => {
+    const isItemExists = state.items.some(item => item.id === id);
+    
+    if (isItemExists) {
+      return state;
+    }
+
+    return { ...state, items: [...state.items, { id, name }] };
+  }),
+  on(removeFromCart, (state, { id }) => ({
+    ...state,
+    items: state.items.filter(item => item.id !== id)
+  }))
 );

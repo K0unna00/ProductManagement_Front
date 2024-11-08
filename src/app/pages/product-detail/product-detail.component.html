@@ -8,6 +8,7 @@
                 <input matInput formControlName="name" type="text" required>
                 <mat-error *ngIf="form.get('name').hasError('required')">Name is required.</mat-error>
                 <mat-error *ngIf="form.get('name').hasError('minlength')">Name must be at least 3 characters long.</mat-error>
+                <mat-error *ngIf="form.get('description').hasError('maxlength')">Name cannot be longer than 20 characters.</mat-error>
             </mat-form-field>
         </div>
         
@@ -17,6 +18,7 @@
                 <input matInput formControlName="description" type="text" required>
                 <mat-error *ngIf="form.get('description').hasError('required')">Description is required.</mat-error>
                 <mat-error *ngIf="form.get('description').hasError('maxlength')">Description cannot be longer than 40 characters.</mat-error>
+                <mat-error *ngIf="form.get('name').hasError('minlength')">Description must be at least 3 characters long.</mat-error>
             </mat-form-field>
         </div>
         

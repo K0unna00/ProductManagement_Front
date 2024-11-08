@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { CartState } from '../../store/reducers/cart.reducers';
+import { selectCartCount } from '../../store/selectors/cart.selector';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +14,7 @@ export class NavbarComponent {
   cartCount$: Observable<number>;
   
   constructor(private router : Router, private store: Store<{ cart: CartState }>) {
-    this.cartCount$ = store.pipe(select('cart', 'count'));
+    this.cartCount$ = store.pipe(select(selectCartCount));
   }
 
   navigateToHome(){
@@ -22,5 +23,9 @@ export class NavbarComponent {
 
   navigateToProductDetail(){
     this.router.navigate(['/products/0']);
+  }
+
+  navigateToCard(){
+    this.router.navigate(['/cart']);
   }
 }

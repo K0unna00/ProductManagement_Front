@@ -9,7 +9,7 @@
                 Create product
             </button>
 
-            <div class="cart">
+            <div class="cart" (click)="navigateToCard()">
                 <mat-icon class="cartIcon" color="primary">shopping_cart</mat-icon>
                 <span class="productCount">
                     {{ cartCount$ | async }}

@@ -25,8 +25,8 @@ export class ProductDetailComponent {
 
   setupForm(){
     this.form = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(3)]],
-      description: ['', [Validators.required , Validators.maxLength(40)]],
+      name: ['', [Validators.required, Validators.minLength(3) , Validators.maxLength(20)]],
+      description: ['', [Validators.required , Validators.minLength(3), Validators.maxLength(40)]],
       price : ['', [Validators.required, Validators.min(1)] ],
     });
   }

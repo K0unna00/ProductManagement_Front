@@ -11,6 +11,7 @@ import { ProductCardComponent } from "../../components/product-card/product-card
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { CartComponent } from '../cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { MatInputModule } from '@angular/material/input';
     ProductDetailComponent,
     HomeComponent,
     NavbarComponent,
+    CartComponent
   ],
   imports: [
     CommonModule,
