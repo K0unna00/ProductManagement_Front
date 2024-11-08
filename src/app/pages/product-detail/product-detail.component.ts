@@ -13,6 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ProductDetailComponent {
   form: FormGroup;
   currentId : string;
+  currentData : Product;
   constructor(private fb: FormBuilder, private productService: ProductService,
     private route : ActivatedRoute,
     private router : Router
@@ -42,6 +43,8 @@ export class ProductDetailComponent {
 
   async getProductById(id: string){
     let data = await lastValueFrom(this.productService.getById(id));
+
+    this.currentData = data;
 
     this.form.patchValue({
       description: data.description,

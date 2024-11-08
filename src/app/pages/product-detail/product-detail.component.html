@@ -1,7 +1,6 @@
 <div class="container p-0">
-    <h1>Create Product</h1>
+    <h1 >{{ currentData ? 'Edit Product' : 'Create Product' }}</h1>
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
-        
         <div class="formItem col-6">
             <mat-form-field appearance="fill">
                 <mat-label>Name</mat-label>
@@ -33,10 +32,10 @@
 
         <div  class="formItem col-12 buttons p-0">
             <div class="submitBtn">
-                <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Create Product</button>
+                <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">{{ currentData ? 'Edit Product' : 'Create Product' }}</button>
             </div>
 
-            <div class="deleteBtn" *ngIf="currentId != '0'">
+            <div class="deleteBtn" *ngIf="currentData">
                 <button mat-raised-button color="warn" (click)="deleteItem()"> Delete Product</button>
             </div>
         </div>
