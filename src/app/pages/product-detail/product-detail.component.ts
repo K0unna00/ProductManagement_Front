@@ -4,6 +4,9 @@ import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product.model';
 import { lastValueFrom } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { CartState } from '../../store/reducers/cart.reducers';
+import { removeFromCart } from '../../store/actions/cart.actions';
 
 @Component({
   selector: 'app-product-detail',
@@ -16,7 +19,8 @@ export class ProductDetailComponent {
   currentData : Product;
   constructor(private fb: FormBuilder, private productService: ProductService,
     private route : ActivatedRoute,
-    private router : Router
+    private router : Router,
+    private store: Store<{ cart: CartState }>
   ) { }
 
   ngOnInit(): void {
@@ -78,6 +82,9 @@ export class ProductDetailComponent {
   }
 
   async deleteItem(){
+    let id = this.currentId
+    this.store.dispatch(removeFromCart({ id}));
+
     await lastValueFrom(this.productService.delete(this.currentId));
 
     this.router.navigate(['']);
