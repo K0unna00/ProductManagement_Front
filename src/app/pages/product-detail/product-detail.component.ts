@@ -22,7 +22,8 @@ export class ProductDetailComponent {
     private route : ActivatedRoute,
     private router : Router,
     private store: Store<{ cart: CartState }>
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.setupForm();
@@ -38,6 +39,7 @@ export class ProductDetailComponent {
   }
 
   getParams(){
+    
     this.route.paramMap.subscribe(params => {
       this.currentId = params.get('id'); 
       if(this.currentId != '0'){
@@ -67,10 +69,7 @@ export class ProductDetailComponent {
     let product : Product = {
       ...this.form.value
     };
-
-    console.log("SUBMIT WORKDSDAS");
     
-
     if(this.currentId != '0'){
       product.id = this.currentId;
 
