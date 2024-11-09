@@ -12,12 +12,16 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
-  styleUrl: './product-detail.component.scss'
+  styleUrl: './product-detail.component.scss',
+
 })
 export class ProductDetailComponent {
   form: FormGroup;
   currentId : string;
   currentData : Product;
+  selectedFile: File | null = null;
+  imgPreview : any;
+  isileInputClicked: boolean;
   constructor(private fb: FormBuilder, private productService: ProductService,
     private route : ActivatedRoute,
     private router : Router,
@@ -39,10 +43,9 @@ export class ProductDetailComponent {
   }
 
   getParams(){
-    
     this.route.paramMap.subscribe(params => {
       this.currentId = params.get('id'); 
-      if(this.currentId != '0'){
+      if(this.currentId != 'create'){
         this.getProductById(this.currentId);
       }
     });
@@ -51,9 +54,7 @@ export class ProductDetailComponent {
   async getProductById(id: string){
     try{
       let data = await lastValueFrom(this.productService.getById(id));
-
       this.currentData = data;
-  
       this.form.patchValue({
         description: data.description,
         name: data.name,
@@ -69,16 +70,13 @@ export class ProductDetailComponent {
     let product : Product = {
       ...this.form.value
     };
-    
-    if(this.currentId != '0'){
+    if(this.currentId != 'create'){
       product.id = this.currentId;
-
       await lastValueFrom(this.productService.update(this.currentId, product));
     }
     else{
       await lastValueFrom(this.productService.create(product));
     }
-
     Swal.fire({
       position: "top-end",
       icon: "success",
@@ -86,7 +84,6 @@ export class ProductDetailComponent {
       showConfirmButton: false,
       timer: 1500
     });
-
     this.router.navigate(['']);
   }
 
@@ -105,6 +102,37 @@ export class ProductDetailComponent {
     });
 
     this.router.navigate(['']);
+  }
+
+  onFileSelected(event: Event): void {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      if (!file.type.startsWith('image/')) {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Please select an image",
+          showConfirmButton: false,
+          timer: 1500
+        });
+        return;
+      }
+      this.selectedFile = file;
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imgPreview = reader.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  onFileInputClicked(){
+    this.isileInputClicked = true;
+  }
+
+  clearImage(){
+    this.selectedFile = null;
   }
 
 }

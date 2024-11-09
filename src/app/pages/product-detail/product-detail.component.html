@@ -30,13 +30,29 @@
             </mat-form-field>
         </div>
 
+        <div class="formItem col-6 d-flex align-items-center">
+            <button type="button" mat-raised-button color="primary" (click)="fileInput.click()">Select File</button>
+            <span class="ms-2" *ngIf="selectedFile">{{ selectedFile.name | ellipsis}}</span>
+
+            <input type="file" #fileInput (change)="onFileSelected($event)" style="display: none;" required accept=".jpg, .jpeg, .png" (click)="onFileInputClicked()">
+
+            <mat-error class="ms-2" *ngIf="isileInputClicked && !selectedFile">File is required.</mat-error>
+            <button *ngIf="selectedFile" mat-fab color="primary" class="editBtn" (click)="clearImage()">
+                <mat-icon class="deleteIcon">delete</mat-icon>
+            </button>
+
+            <div class="imgPreview" *ngIf="selectedFile">
+                <img [src]="imgPreview" alt="">
+            </div>
+        </div>
+
         <div  class="formItem col-12 buttons p-0">
             <div class="submitBtn">
                 <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">{{ currentData ? 'Edit Product' : 'Create Product' }}</button>
             </div>
 
             <div class="deleteBtn" *ngIf="currentData">
-                <button mat-raised-button color="warn" type="button" (click)="deleteItem()"> Delete Product</button>
+                <button mat-raised-button color="warn" type="button" (click)="deleteItem()">Delete Product</button>
             </div>
         </div>
     </form>

@@ -22,7 +22,7 @@ export class NavbarComponent {
   }
 
   navigateToProductDetail(){
-    this.router.navigate(['/products/0']);
+    this.router.navigate(['/products/create']);
   }
 
   navigateToCard(){

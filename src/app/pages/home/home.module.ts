@@ -8,11 +8,12 @@ import { AppRoutingModule } from '../../app-routing.module';
 import { MatButtonModule } from '@angular/material/button'; 
 import { MatIconModule } from '@angular/material/icon';
 import { ProductCardComponent } from "../../components/product-card/product-card.component";
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CartComponent } from '../cart/cart.component';
 import { NotFoundComponent } from '../not-found/not-found.component';
+import { EllipsisPipe } from '../../pipes/ellipsis.pipe';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { NotFoundComponent } from '../not-found/not-found.component';
     HomeComponent,
     NavbarComponent,
     CartComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    EllipsisPipe
   ],
   imports: [
     CommonModule,
@@ -32,6 +34,8 @@ import { NotFoundComponent } from '../not-found/not-found.component';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
+    FormsModule,
+    MatIconModule
 ],
   exports : [
     HomeComponent

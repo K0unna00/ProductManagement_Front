@@ -22,3 +22,24 @@
         align-items: center;
     }
 }
+
+.editBtn{
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+    .deleteIcon{
+        font-size:18px;
+    }
+}
+
+.imgPreview{
+    width: 150px;
+    height: 150px;
+    img{
+        width: 100%;
+        
+    }
+}
