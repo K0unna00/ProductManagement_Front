@@ -14,6 +14,7 @@ import { cartReducer } from './store/reducers/cart.reducers';
 @NgModule({
   declarations: [
     AppComponent,
+
   ],
   imports: [
     HomeModule,

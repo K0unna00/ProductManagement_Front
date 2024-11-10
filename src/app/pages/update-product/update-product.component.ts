@@ -1,21 +1,20 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ProductService } from '../../services/product.service';
-import { Product, ProductDTO } from '../../models/product.model';
-import { from, lastValueFrom } from 'rxjs';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { CartState } from '../../store/reducers/cart.reducers';
-import { removeFromCart } from '../../store/actions/cart.actions';
+import { lastValueFrom } from 'rxjs';
 import Swal from 'sweetalert2';
+import { ProductDTO } from '../../models/product.model';
+import { ProductService } from '../../services/product.service';
+import { removeFromCart } from '../../store/actions/cart.actions';
+import { CartState } from '../../store/reducers/cart.reducers';
 
 @Component({
-  selector: 'app-product-detail',
-  templateUrl: './product-detail.component.html',
-  styleUrl: './product-detail.component.scss',
-
+  selector: 'app-update-product',
+  templateUrl: './update-product.component.html',
+  styleUrl: './update-product.component.scss'
 })
-export class ProductDetailComponent {
+export class UpdateProductComponent {
   form: FormGroup;
   currentId: string;
   currentData: ProductDTO;

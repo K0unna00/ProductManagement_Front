@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
-import { ProductDetailComponent } from '../product-detail/product-detail.component';
 import { ProductListComponent } from '../product-list/product-list.component';
 import { HomeComponent } from './home.component';
 import { AppRoutingModule } from '../../app-routing.module';
@@ -14,16 +13,19 @@ import { MatInputModule } from '@angular/material/input';
 import { CartComponent } from '../cart/cart.component';
 import { NotFoundComponent } from '../not-found/not-found.component';
 import { EllipsisPipe } from '../../pipes/ellipsis.pipe';
+import { CreateProductComponent } from '../create-product/create-product.component';
+import { UpdateProductComponent } from '../update-product/update-product.component';
 
 @NgModule({
   declarations: [
     ProductListComponent,
-    ProductDetailComponent,
     HomeComponent,
     NavbarComponent,
     CartComponent,
     NotFoundComponent,
-    EllipsisPipe
+    EllipsisPipe,
+    CreateProductComponent,
+    UpdateProductComponent,
   ],
   imports: [
     CommonModule,

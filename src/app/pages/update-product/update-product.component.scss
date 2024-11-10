@@ -1,0 +1,45 @@
+
+.form{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    .formItem {
+        &:nth-child(odd){
+            padding-right: 10px;
+        }
+        &:nth-child(even){
+            padding-left: 10px;
+        }
+        mat-form-field{
+            width: 100%;
+        }
+    }
+    .buttons{
+        padding: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.editBtn{
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+    .deleteIcon{
+        font-size:18px;
+    }
+}
+
+.imgPreview{
+    width: 50%;
+    max-height: 500px;
+    img{
+        width: 100%;
+        max-height: 100%;
+    }
+}
