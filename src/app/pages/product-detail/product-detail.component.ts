@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductService } from '../../services/product.service';
-import { Product } from '../../models/product.model';
-import { lastValueFrom } from 'rxjs';
+import { Product, ProductDTO } from '../../models/product.model';
+import { from, lastValueFrom } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { CartState } from '../../store/reducers/cart.reducers';
@@ -17,14 +17,14 @@ import Swal from 'sweetalert2';
 })
 export class ProductDetailComponent {
   form: FormGroup;
-  currentId : string;
-  currentData : Product;
+  currentId: string;
+  currentData: ProductDTO;
   selectedFile: File | null = null;
-  imgPreview : any;
-  isileInputClicked: boolean;
+  imgPreview: any;
+  isFileInputClicked: boolean;
   constructor(private fb: FormBuilder, private productService: ProductService,
-    private route : ActivatedRoute,
-    private router : Router,
+    private route: ActivatedRoute,
+    private router: Router,
     private store: Store<{ cart: CartState }>
   ) {
   }
@@ -34,64 +34,51 @@ export class ProductDetailComponent {
     this.getParams();
   }
 
-  setupForm(){
+  setupForm() {
     this.form = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(3) , Validators.maxLength(20)]],
-      description: ['', [Validators.required , Validators.minLength(3), Validators.maxLength(40)]],
-      price : ['', [Validators.required, Validators.min(1)] ],
+      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      description: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(40)]],
+      price: ['', [Validators.required, Validators.min(1)]],
+      image: ['', [Validators.required]]
     });
   }
 
-  getParams(){
+  getParams() {
     this.route.paramMap.subscribe(params => {
-      this.currentId = params.get('id'); 
-      if(this.currentId != 'create'){
+      this.currentId = params.get('id');
+      if (this.currentId != 'create') {
         this.getProductById(this.currentId);
       }
     });
   }
 
-  async getProductById(id: string){
-    try{
+  async getProductById(id: string) {
+    try {
       let data = await lastValueFrom(this.productService.getById(id));
       this.currentData = data;
       this.form.patchValue({
         description: data.description,
         name: data.name,
-        price: data.price
+        price: data.price,
+        image: data.imgBase64
       });
+
+      this.imgPreview = 'data:image/png;base64,' + this.currentData.imgBase64;
+      
+      this.isFileInputClicked = true;
     }
-    catch(err){
-      this.router.navigate(['notFound'])
+    catch (err) {
+      console.log(err);
+
+      // this.router.navigate(['notFound'])
     }
   }
 
-  async onSubmit() {
-    let product : Product = {
-      ...this.form.value
-    };
-    if(this.currentId != 'create'){
-      product.id = this.currentId;
-      await lastValueFrom(this.productService.update(this.currentId, product));
-    }
-    else{
-      await lastValueFrom(this.productService.create(product));
-    }
-    Swal.fire({
-      position: "top-end",
-      icon: "success",
-      title: "Product saved successfully",
-      showConfirmButton: false,
-      timer: 1500
-    });
-    this.router.navigate(['']);
-  }
-
-  async deleteItem(){
+  async deleteItem() {
     let id = this.currentId
-    this.store.dispatch(removeFromCart({ id}));
+    this.store.dispatch(removeFromCart({ id }));
 
-    await lastValueFrom(this.productService.delete(this.currentId));
+    await lastValueFrom(this.productService.deleteProduct(this.currentId));
 
     Swal.fire({
       position: "top-end",
@@ -118,21 +105,55 @@ export class ProductDetailComponent {
         return;
       }
       this.selectedFile = file;
+      this.showImgPreview(file);
 
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.imgPreview = reader.result;
-      };
-      reader.readAsDataURL(file);
+      this.form.get("image").setValue(file)
     }
   }
 
-  onFileInputClicked(){
-    this.isileInputClicked = true;
+  showImgPreview(file: File) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imgPreview = reader.result;
+    };
+    reader.readAsDataURL(file);
   }
 
-  clearImage(){
+  onFileInputClicked() {
+    this.isFileInputClicked = true;
+  }
+
+  clearImage() {
     this.selectedFile = null;
+    this.imgPreview = null;
+    this.form.get("image").setValue('')
+  }
+
+  async onSubmit() {
+    const formData = new FormData();
+
+    formData.append('name', this.form.get('name')?.value);
+    formData.append('description', this.form.get('description')?.value);
+    formData.append('price', this.form.get('price')?.value);
+    formData.append('image', this.selectedFile)
+
+    if (this.currentId != 'create') {
+      formData.append('id', this.currentId)
+      await lastValueFrom(this.productService.updateProduct(this.currentId, formData));
+    }
+    else {
+      await lastValueFrom(this.productService.createProduct(formData));
+    }
+
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Product saved successfully",
+      showConfirmButton: false,
+      timer: 1500
+    });
+
+    this.router.navigate(['']);
   }
 
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Product } from '../../models/product.model';
+import { Product, ProductDTO } from '../../models/product.model';
 import { firstValueFrom, lastValueFrom, Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { CartState } from '../../store/reducers/cart.reducers';
@@ -14,7 +14,7 @@ import { ProductService } from '../../services/product.service';
 })
 export class CartComponent {
   isAnyItem : boolean;
-  products : Product[];
+  products : ProductDTO[];
   items: {id : string, name: string}[];
   
   constructor(private router : Router, private store: Store<{ cart: CartState }>,

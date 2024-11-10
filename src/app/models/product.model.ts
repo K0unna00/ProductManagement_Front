@@ -3,5 +3,14 @@ export interface Product {
     name: string;
     price: number;
     description: string;
-    createdAt : Date;
+    imgName : string
+}
+
+export interface ProductDTO{
+    id: string;
+    name: string;
+    price: number;
+    description: string;
+    image : File;
+    imgBase64? : string
 }

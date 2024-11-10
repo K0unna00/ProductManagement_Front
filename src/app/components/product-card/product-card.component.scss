@@ -8,10 +8,11 @@
     width: 300px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     position: relative;
-    height: 250px;
+    height: 450px;
   
   .image {
-    max-width: 100%;
+    width: 85%;
+    margin: 0 auto;
     height: auto;
     border-radius: 8px;
     margin-bottom: 16px;

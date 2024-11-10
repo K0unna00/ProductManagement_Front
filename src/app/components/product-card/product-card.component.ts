@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Product } from '../../models/product.model';
+import { Product, ProductDTO } from '../../models/product.model';
 import { Router } from '@angular/router';
 import { CurrencyPipe, NgIf } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,7 +15,7 @@ import { addToCart } from '../../store/actions/cart.actions';
   imports : [CurrencyPipe, MatButtonModule, MatIconModule, NgIf]
 })
 export class ProductCardComponent {
-  @Input() product : Product
+  @Input() product : ProductDTO
   @Input() isViewMode : boolean ;
 
   constructor(private router: Router,

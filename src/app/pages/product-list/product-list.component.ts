@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../../models/product.model';
+import { Product, ProductDTO } from '../../models/product.model';
 import { ProductService } from '../../services/product.service';
 import { lastValueFrom } from 'rxjs';
 
@@ -9,13 +9,13 @@ import { lastValueFrom } from 'rxjs';
   styleUrl: './product-list.component.scss'
 })
 export class ProductListComponent implements OnInit {
-  products : Product[];
+  products : ProductDTO[];
   
   constructor(private productService : ProductService) {
   }
 
   async ngOnInit() {
-    this.products = await lastValueFrom(this.productService.get())
+    this.products = await lastValueFrom(this.productService.getProducts())
   }
 
 }

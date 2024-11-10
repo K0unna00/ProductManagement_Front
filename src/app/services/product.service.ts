@@ -1,36 +1,39 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Product } from '../models/product.model';
+import { Product, ProductDTO } from '../models/product.model';
+import { BaseService } from './base.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
+export class ProductService extends BaseService {
 
-  constructor(private http: HttpClient) { }
-
-  get(): Observable<Product[]> {
-    return this.http.get<Product[]>('product');
+  constructor(http : HttpClient) {
+    super(http);
   }
 
-  getById(id: string): Observable<Product> {
-    return this.http.get<Product>(`product/${id}`);
+  getProducts() {
+    return this.get<ProductDTO[]>(`product/`);
   }
 
-  create(model : Product) : Observable<any>{
-    return this.http.post<Product>(`product/`, model);
+  getById(id: string) {
+    return this.get<ProductDTO>(`product/${id}`);
   }
 
-  delete(id: string): Observable<any> {
-    return this.http.delete(`product/${id}`)
+  createProduct(model : FormData) {
+    return this.post<FormData>(`product/`, model);
   }
 
-  update(id: string, model: Product): Observable<Product> {
-    return this.http.put<Product>(`product/${id}`, model);
+  deleteProduct(id: string){
+    return this.delete(`product/${id}`)
   }
 
-  getByIds(ids : string[]) : Observable<Product[]>{
-    return this.http.post<Product[]>(`product/getByIds`, ids)
+  updateProduct(id: string, model: FormData) {
+    return this.update<FormData>(`product/`, id , model);
+  }
+
+  getByIds(ids : string[]) {
+    return this.http.post<ProductDTO[]>(`product/getByIds`, ids)
   }
 }
