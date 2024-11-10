@@ -11,7 +11,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CartComponent } from '../cart/cart.component';
-import { NotFoundComponent } from '../not-found/not-found.component';
 import { EllipsisPipe } from '../../pipes/ellipsis.pipe';
 import { CreateProductComponent } from '../create-product/create-product.component';
 import { UpdateProductComponent } from '../update-product/update-product.component';
@@ -22,7 +21,6 @@ import { UpdateProductComponent } from '../update-product/update-product.compone
     HomeComponent,
     NavbarComponent,
     CartComponent,
-    NotFoundComponent,
     EllipsisPipe,
     CreateProductComponent,
     UpdateProductComponent,

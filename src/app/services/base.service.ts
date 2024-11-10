@@ -19,7 +19,6 @@ export class BaseService {
           throw new Error(response.errorMessage);
         }
       }),
-      catchError(this.handleError)
     );
   }
 
@@ -32,7 +31,6 @@ export class BaseService {
           throw new Error(response.errorMessage);
         }
       }),
-      catchError(this.handleError)
     );
   }
 
@@ -48,7 +46,6 @@ export class BaseService {
           throw new Error(response.errorMessage);
         }
       }),
-      catchError(this.handleError)
     );
   }
 
@@ -59,20 +56,7 @@ export class BaseService {
           throw new Error(response.errorMessage);
         }
         return response;
-      }),
-      catchError(this.handleError)
+      })
     );
-  }
-
-
-
-  handleError(error: HttpErrorResponse) {
-    let errorMessage = 'An error occurred';
-    // if (error.error instanceof ErrorEvent) {
-    //   errorMessage = `Error: ${error.error.message}`;
-    // } else if (error.error?.errorMessage) {
-    //   errorMessage = error.error.errorMessage;
-    // }
-    return throwError(() => new Error(errorMessage));
   }
 }
