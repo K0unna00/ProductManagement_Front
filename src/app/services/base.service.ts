@@ -34,11 +34,12 @@ export class BaseService {
     );
   }
 
-  update<T>(action : string, id: string, model : T) : Observable<T>{
+  update<T>(action : string, model : T) : Observable<T>{
 
+    console.log(action);
     console.log(model);
 
-    return this.http.put<ApiResponse<T>>(action + id, model).pipe(
+    return this.http.put<ApiResponse<T>>(action , model).pipe(
       map(response => {
         if (response.isSuccess) {
           return response.data;

@@ -34,11 +34,8 @@
         <div class="formItem col-6 d-flex align-items-center">
             <button type="button" mat-raised-button color="primary" (click)="fileInput.click()">Select File</button>
             <span class="ms-2" *ngIf="selectedFile">{{ selectedFile.name | ellipsis}}</span>
-
-            <input type="file" #fileInput (change)="onFileSelected($event)" style="display: none;" required accept=".jpg, .jpeg, .png" (click)="onFileInputClicked()" >
-
+            <input type="file" #fileInput (change)="onFileSelected($event)" style="display: none;" required accept=".jpg, .jpeg, .png" (click)="onFileInputClicked()">
             <mat-error class="ms-2" *ngIf="isFileInputClicked && !imgPreview">File is required.</mat-error>
-            
             <button *ngIf="imgPreview" mat-fab color="primary" class="editBtn" (click)="clearImage()">
                 <mat-icon class="deleteIcon">delete</mat-icon>
             </button>

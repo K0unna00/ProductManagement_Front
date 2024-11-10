@@ -63,13 +63,11 @@ export class UpdateProductComponent {
       });
 
       this.imgPreview = 'data:image/png;base64,' + this.currentData.imgBase64;
-      
+
       this.isFileInputClicked = true;
     }
     catch (err) {
       console.log(err);
-
-      // this.router.navigate(['notFound'])
     }
   }
 
@@ -91,6 +89,7 @@ export class UpdateProductComponent {
   }
 
   onFileSelected(event: Event): void {
+    const maxFileSize = 2 * 1024 * 1024;
     const file = (event.target as HTMLInputElement).files?.[0];
     if (file) {
       if (!file.type.startsWith('image/')) {
@@ -103,6 +102,18 @@ export class UpdateProductComponent {
         });
         return;
       }
+
+      if (file.size > maxFileSize) {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "File's size cant be more than 2mb",
+          showConfirmButton: false,
+          timer: 1500
+        });
+        return;
+      }
+
       this.selectedFile = file;
       this.showImgPreview(file);
 
@@ -134,15 +145,10 @@ export class UpdateProductComponent {
     formData.append('name', this.form.get('name')?.value);
     formData.append('description', this.form.get('description')?.value);
     formData.append('price', this.form.get('price')?.value);
-    formData.append('image', this.selectedFile)
+    formData.append('image', this.selectedFile);
+    formData.append('id', this.currentId);
 
-    if (this.currentId != 'create') {
-      formData.append('id', this.currentId)
-      await lastValueFrom(this.productService.updateProduct(this.currentId, formData));
-    }
-    else {
-      await lastValueFrom(this.productService.createProduct(formData));
-    }
+    await lastValueFrom(this.productService.updateProduct(this.currentId, formData));
 
     Swal.fire({
       position: "top-end",

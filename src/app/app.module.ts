@@ -11,16 +11,17 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { HomeModule } from './pages/home/home.module';
 import { cartReducer } from './store/reducers/cart.reducers';
 import { ErrorComponent } from './components/error/error.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
     AppComponent,
     ErrorComponent,
-
   ],
   imports: [
     HomeModule,
     BrowserModule,
+    MatButtonModule,
     AppRoutingModule,
     HttpClientModule,
     StoreModule.forRoot({ cart: cartReducer }),

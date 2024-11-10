@@ -30,7 +30,7 @@ export class ProductService extends BaseService {
   }
 
   updateProduct(id: string, model: FormData) {
-    return this.update<FormData>(`product/`, id , model);
+    return this.update<FormData>(`product/${id}`, model);
   }
 
   getByIds(ids : string[]) {

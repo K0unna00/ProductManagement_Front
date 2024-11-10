@@ -22,9 +22,7 @@ export class CreateProductComponent {
   imgPreview: any;
   isFileInputClicked: boolean;
   constructor(private fb: FormBuilder, private productService: ProductService,
-    private route: ActivatedRoute,
     private router: Router,
-    private store: Store<{ cart: CartState }>
   ) {
   }
 
@@ -43,7 +41,10 @@ export class CreateProductComponent {
 
   onFileSelected(event: Event): void {
     const file = (event.target as HTMLInputElement).files?.[0];
+    const maxFileSize = 2 * 1024 * 1024;
     if (file) {
+      console.log(file.size);
+      
       if (!file.type.startsWith('image/')) {
         Swal.fire({
           position: "center",
@@ -54,6 +55,18 @@ export class CreateProductComponent {
         });
         return;
       }
+      if (file.size > maxFileSize) {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "File's size cant be more than 2mb",
+          showConfirmButton: false,
+          timer: 1500
+        });
+        return;
+      }
+
+
       this.selectedFile = file;
       this.showImgPreview(file);
 
@@ -85,7 +98,7 @@ export class CreateProductComponent {
     formData.append('name', this.form.get('name')?.value);
     formData.append('description', this.form.get('description')?.value);
     formData.append('price', this.form.get('price')?.value);
-    formData.append('image', this.selectedFile)
+    formData.append('image', this.selectedFile)    
 
     await lastValueFrom(this.productService.createProduct(formData));
 
