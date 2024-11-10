@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
 import Swal from 'sweetalert2';
 import { ProductDTO } from '../../models/product.model';
 import { ProductService } from '../../services/product.service';
-import { removeFromCart } from '../../store/actions/cart.actions';
-import { CartState } from '../../store/reducers/cart.reducers';
 
 @Component({
   selector: 'app-create-product',
@@ -65,7 +62,6 @@ export class CreateProductComponent {
         });
         return;
       }
-
 
       this.selectedFile = file;
       this.showImgPreview(file);

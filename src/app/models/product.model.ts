@@ -12,5 +12,5 @@ export interface ProductDTO{
     price: number;
     description: string;
     image : File;
-    imgBase64? : string
+    imgPath? : string
 }

@@ -8,6 +8,7 @@ import { ProductDTO } from '../../models/product.model';
 import { ProductService } from '../../services/product.service';
 import { removeFromCart } from '../../store/actions/cart.actions';
 import { CartState } from '../../store/reducers/cart.reducers';
+import { FilePaths } from '../../constants/FilePath';
 
 @Component({
   selector: 'app-update-product',
@@ -59,10 +60,13 @@ export class UpdateProductComponent {
         description: data.description,
         name: data.name,
         price: data.price,
-        image: data.imgBase64
+        image: data.imgPath
       });
 
-      this.imgPreview = 'data:image/png;base64,' + this.currentData.imgBase64;
+      this.imgPreview = FilePaths.MAIN_FILE_PATH + this.currentData.imgPath;
+
+      console.log(this.imgPreview);
+      
 
       this.isFileInputClicked = true;
     }
