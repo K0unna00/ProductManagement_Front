@@ -1,13 +1,16 @@
 <div class="products">
     <div class="container p-0">
-        <div class="title w-100">
+        <div class="title w-100 d-flex justify-content-between">
             <h1 class="m-0 ">Cart</h1>
-            <div class="info" *ngIf="!isAnyItem">
-                Cart is empty
-            </div>
-            <div class="list" *ngIf="isAnyItem">
-                <app-product-card [isViewMode]="true" *ngFor="let item of products" [product]="item"></app-product-card>
-            </div>
+            <button mat-raised-button color="warn" *ngIf="isAnyItem" (click)="clearCart()">
+                Clear cart
+            </button>
+        </div>
+        <div class="info " *ngIf="!isAnyItem">
+            <div>Cart is empty</div>
+        </div>
+        <div class="list" *ngIf="isAnyItem">
+            <app-product-card [isViewMode]="true" *ngFor="let item of products" [product]="item" (deleteFromCartEmitter)="deleteFromCard($event)"></app-product-card>
         </div>
     </div>
 </div>

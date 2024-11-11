@@ -60,13 +60,10 @@ export class UpdateProductComponent {
         description: data.description,
         name: data.name,
         price: data.price,
-        image: data.imgPath
+        image: data.imgName
       });
 
-      this.imgPreview = FilePaths.MAIN_FILE_PATH + this.currentData.imgPath;
-
-      console.log(this.imgPreview);
-      
+      this.imgPreview = FilePaths.MAIN_FILE_PATH + this.currentData.imgName;
 
       this.isFileInputClicked = true;
     }
@@ -151,6 +148,7 @@ export class UpdateProductComponent {
     formData.append('price', this.form.get('price')?.value);
     formData.append('image', this.selectedFile);
     formData.append('id', this.currentId);
+    formData.append('imgName', this.currentData.imgName);
 
     await lastValueFrom(this.productService.updateProduct(this.currentId, formData));
 

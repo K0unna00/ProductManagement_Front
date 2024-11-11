@@ -40,8 +40,6 @@ export class CreateProductComponent {
     const file = (event.target as HTMLInputElement).files?.[0];
     const maxFileSize = 2 * 1024 * 1024;
     if (file) {
-      console.log(file.size);
-      
       if (!file.type.startsWith('image/')) {
         Swal.fire({
           position: "center",
@@ -94,7 +92,7 @@ export class CreateProductComponent {
     formData.append('name', this.form.get('name')?.value);
     formData.append('description', this.form.get('description')?.value);
     formData.append('price', this.form.get('price')?.value);
-    formData.append('image', this.selectedFile)    
+    formData.append('image', this.selectedFile)     
 
     await lastValueFrom(this.productService.createProduct(formData));
 

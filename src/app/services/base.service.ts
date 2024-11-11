@@ -35,10 +35,6 @@ export class BaseService {
   }
 
   update<T>(action : string, model : T) : Observable<T>{
-
-    console.log(action);
-    console.log(model);
-
     return this.http.put<ApiResponse<T>>(action , model).pipe(
       map(response => {
         if (response.isSuccess) {

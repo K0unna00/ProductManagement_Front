@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { Product, ProductDTO } from '../../models/product.model';
+import { ProductDTO } from '../../models/product.model';
 import { firstValueFrom, lastValueFrom, Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { CartState } from '../../store/reducers/cart.reducers';
-import { selectCartCount, selectCartItems } from '../../store/selectors/cart.selector';
+import { selectCartItems } from '../../store/selectors/cart.selector';
 import { Router } from '@angular/router';
 import { ProductService } from '../../services/product.service';
+import { clearCart, removeFromCart } from '../../store/actions/cart.actions';
 
 @Component({
   selector: 'app-cart',
@@ -29,5 +30,15 @@ export class CartComponent {
         const ids = this.items.map((item) => item.id )
         this.products = await lastValueFrom(this.productService.getByIds(ids));
       }
+  }
+
+  deleteFromCard(id){
+    this.store.dispatch(removeFromCart({ id }));
+    this.products = this.products.filter(x => x.id != id);
+  }
+
+  clearCart(){
+    this.store.dispatch(clearCart())
+    this.products = [];
   }
 }

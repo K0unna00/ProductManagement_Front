@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Product, ProductDTO } from '../models/product.model';
+import { ProductDTO } from '../models/product.model';
 import { BaseService } from './base.service';
+import { map } from 'rxjs';
+import { ApiResponse } from '../models/apiResponse.model';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,15 @@ export class ProductService extends BaseService {
   }
 
   getByIds(ids : string[]) {
-    return this.http.post<ProductDTO[]>(`product/getByIds`, ids)
+
+    return this.http.post<ApiResponse<ProductDTO[]>>(`product/getByIds`, ids).pipe(
+      map(response => {
+        if (response.isSuccess) {
+          return response.data;
+        } else {
+          throw new Error(response.errorMessage);
+        }
+      }),
+    );
   }
 }

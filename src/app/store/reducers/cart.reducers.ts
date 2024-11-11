@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { addToCart, removeFromCart } from '../actions/cart.actions';
+import { addToCart, clearCart, removeFromCart } from '../actions/cart.actions';
 
 export interface CartState {
   count: number;
@@ -25,5 +25,11 @@ export const cartReducer = createReducer(
   on(removeFromCart, (state, { id }) => ({
     ...state,
     items: state.items.filter(item => item.id !== id)
-  }))
+  })),
+  
+  on(clearCart, (state) => (
+    {
+      ...state, items : []
+    }
+  ))
 );

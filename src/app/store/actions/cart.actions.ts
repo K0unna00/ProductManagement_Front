@@ -9,3 +9,7 @@ export const removeFromCart = createAction(
   'Removed',
   props<{ id: string }>()
 );
+
+export const clearCart = createAction(
+  'Cleared',
+)

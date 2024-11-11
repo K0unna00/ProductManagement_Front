@@ -19,4 +19,8 @@
     <button *ngIf="!isViewMode" mat-raised-button class="w-100 addBtn" (click)="addToCart(product.id, product.name)">
         Add to cart
     </button>
+
+    <button *ngIf="isViewMode" mat-raised-button class="w-100 addBtn" color="warn" (click)="deleteFromCart(product.id)">
+        Delete from cart
+    </button>
 </div>

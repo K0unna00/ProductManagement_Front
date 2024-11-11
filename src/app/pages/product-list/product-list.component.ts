@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Product, ProductDTO } from '../../models/product.model';
+import { ProductDTO } from '../../models/product.model';
 import { ProductService } from '../../services/product.service';
 import { lastValueFrom } from 'rxjs';
 
