@@ -1,12 +1,12 @@
 <div class="card">
     <div class="image">
-        <img [src]="imgPreview"  alt="" width="100%" height="100%">
+        <img [src]="imgPreview"  alt="" >
     </div>
     <div class="info">
         <div class="title">{{ product.name }}</div>
 
         <div>
-            <p class="description">{{ product.description }}</p>
+            <p class="description">{{ product.description  | ellipsis : 20}}</p>
         </div>
 
         <div class="price">{{ product.price | currency: 'USD' }}</div>

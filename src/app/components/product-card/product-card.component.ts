@@ -5,15 +5,16 @@ import { CurrencyPipe, NgIf } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Store } from '@ngrx/store';
-import { addToCart, removeFromCart } from '../../store/actions/cart.actions';
+import { addToCart} from '../../store/actions/cart.actions';
 import { FilePaths } from '../../constants/FilePath';
+import { EllipsisPipe } from '../../pipes/ellipsis.pipe';
 
 @Component({
   standalone : true,
   selector: 'app-product-card',
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.scss',
-  imports : [CurrencyPipe, MatButtonModule, MatIconModule, NgIf]
+  imports: [CurrencyPipe, MatButtonModule, MatIconModule, NgIf,EllipsisPipe]
 })
 export class ProductCardComponent implements OnInit{
   @Input() product : ProductDTO;
